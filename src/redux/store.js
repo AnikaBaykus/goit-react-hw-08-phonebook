@@ -1,4 +1,5 @@
 import phoneBookReducer from './phonebook/phonebook-reducer';
+import authReducer from './auth/auth-slice';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
@@ -13,11 +14,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// const persistConfig = {
-//   key: 'subscribers',
-//   storage,
-// };
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -27,15 +23,16 @@ const middleware = [
   logger,
 ]; // логирует экшн
 
-const contactPersistConfig = {
-  key: 'subscriber',
+const authPersistConfig = {
+  key: 'auth',
   storage,
-  blacklist: ['filter'],
+  whitelist: ['token'],
 };
 
 const store = configureStore({
   reducer: {
-    contacts: persistReducer(contactPersistConfig, phoneBookReducer),
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: phoneBookReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development', // Отключить девтулзы для общего пользования

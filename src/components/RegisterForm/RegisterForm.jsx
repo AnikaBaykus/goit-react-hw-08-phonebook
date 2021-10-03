@@ -1,7 +1,7 @@
 import s from './RegisterForm.module.css';
 
 import { useDispatch } from 'react-redux';
-// import { authOperations } from 'redux/auth';
+import { authOperations } from 'redux/auth';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -37,7 +37,7 @@ export default function LoginForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // dispatch(authOperations.Register({ name, email, password }));
+    dispatch(authOperations.register({ name, email, password }));
     resetForm();
   };
 
@@ -83,7 +83,7 @@ export default function LoginForm() {
           type="password"
           name="password"
           pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-          title="Пароль должен состоять минимум из 8 символов"
+          title="Пароль должен состоять минимум из 6 символов, содержать заглавные буквы"
           required
           value={password}
           onChange={handleChange}

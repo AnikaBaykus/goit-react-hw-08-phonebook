@@ -1,8 +1,11 @@
 import { Route, Switch } from 'react-router';
 import { lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import './App.css';
 import Container from './Container';
 import AppBar from './AppBar';
+import { authOperations } from 'redux/auth';
 // import ContactsViews from 'views/ContactsView';
 // import HomeViews from 'views/HomeViews';
 // import RegisterViews from 'views/RegisterViews';
@@ -25,6 +28,10 @@ const NotFoundViews = lazy(() =>
 );
 
 export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
   return (
     <Container>
       <AppBar />
