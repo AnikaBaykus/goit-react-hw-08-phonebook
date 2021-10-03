@@ -9,25 +9,19 @@ import AppBar from './AppBar';
 // import LoginViews from 'views/LoginViews';
 // import NotFoundViews from 'views/NotFoundViews';
 const HomeViews = lazy(() =>
-  import('./HomeViews/HomeViews.jsx' /* webpackChunkName: "Home_Page" */),
+  import('../views/HomeViews.jsx' /* webpackChunkName: "Home_Page" */),
 );
 const RegisterViews = lazy(() =>
-  import(
-    './RegisterViews/RegisterViews.jsx' /* webpackChunkName: "Register_Page" */
-  ),
+  import('../views/RegisterViews.jsx' /* webpackChunkName: "Register_Page" */),
 );
 const LoginViews = lazy(() =>
-  import('./LoginViews/LoginViews.jsx' /* webpackChunkName: "Login_Page" */),
+  import('../views/LoginViews.jsx' /* webpackChunkName: "Login_Page" */),
 );
 const ContactsViews = lazy(() =>
-  import(
-    './ContactsViews/ContactsViews.jsx' /* webpackChunkName: "Contacts_Page" */
-  ),
+  import('../views/ContactsView.jsx' /* webpackChunkName: "Contacts_Page" */),
 );
 const NotFoundViews = lazy(() =>
-  import(
-    './NotFoundViews/NotFoundViews.jsx' /* webpackChunkName: "Not_Found" */
-  ),
+  import('../views/NotFoundViews.jsx' /* webpackChunkName: "Not_Found" */),
 );
 
 export default function App() {
