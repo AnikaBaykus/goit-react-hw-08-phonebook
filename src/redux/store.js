@@ -1,7 +1,10 @@
 import phoneBookReducer from './phonebook/phonebook-reducer';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import storage from 'redux-persist/lib/storage';
 import {
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,6 +12,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+
+// const persistConfig = {
+//   key: 'subscribers',
+//   storage,
+// };
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -19,12 +27,20 @@ const middleware = [
   logger,
 ]; // логирует экшн
 
+const contactPersistConfig = {
+  key: 'subscriber',
+  storage,
+  blacklist: ['filter'],
+};
+
 const store = configureStore({
   reducer: {
-    contacts: phoneBookReducer,
+    contacts: persistReducer(contactPersistConfig, phoneBookReducer),
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development', // Отключить девтулзы для общего пользования
 });
 
-export { store };
+const persistor = persistStore(store);
+
+export { store, persistor };

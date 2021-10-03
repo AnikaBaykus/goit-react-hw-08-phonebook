@@ -1,0 +1,25 @@
+.button {
+  height: 20px;
+  width: 55px;
+  text-decoration: none;
+  text-align: center;
+  padding: 2px 7px;
+  border: solid 1px #ada843;
+  border-radius: 10px;
+  font: 10px Tahoma, Geneva, sans-serif;
+  font-weight: bold;
+  color: #f0f0d3;
+  background-color: #999486;
+  background-image: linear-gradient(to top, #999486 0%, #c8d194 100%);
+  background-image: linear-gradient(to top, #999486 0%, #c8d194 100%);
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #c96553;
+}
+.button:active {
+  background: #b04f3d;
+  box-shadow: 0 3px #b04f3d inset;
+}
