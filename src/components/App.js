@@ -1,16 +1,14 @@
 import { Route, Switch } from 'react-router';
 import { lazy, Suspense } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './App.css';
 import Container from './Container';
 import AppBar from './AppBar';
-import { authOperations } from 'redux/auth';
-// import ContactsViews from 'views/ContactsView';
-// import HomeViews from 'views/HomeViews';
-// import RegisterViews from 'views/RegisterViews';
-// import LoginViews from 'views/LoginViews';
-// import NotFoundViews from 'views/NotFoundViews';
+import { authOperations, authSelectors } from 'redux/auth';
+import PrivateRoute from './AppBar/PrivateRoute';
+import PublicRoute from './AppBar/PublicRoute';
+
 const HomeViews = lazy(() =>
   import('../views/HomeViews.jsx' /* webpackChunkName: "Home_Page" */),
 );
@@ -29,32 +27,36 @@ const NotFoundViews = lazy(() =>
 
 export default function App() {
   const dispatch = useDispatch();
+  const isCurrentUser = useSelector(authSelectors.getIsCurrentUser);
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
   return (
-    <Container>
-      <AppBar />
+    !isCurrentUser && (
+      <Container>
+        <AppBar />
 
-      <Suspense fallback={<p>Loading...</p>}>
-        <Switch>
-          <Route exact path="/">
-            <HomeViews />
-          </Route>
-          <Route exact path="/register">
-            <RegisterViews />
-          </Route>
-          <Route path="/login">
-            <LoginViews />
-          </Route>
-          <Route path="/contacts">
-            <ContactsViews />
-          </Route>
-          <Route>
-            <NotFoundViews />
-          </Route>
-        </Switch>
-      </Suspense>
-    </Container>
+        <Suspense fallback={<p>Loading...</p>}>
+          <Switch>
+            <PublicRoute exact path="/">
+              <HomeViews />
+            </PublicRoute>
+            <PublicRoute exact path="/register" restricted>
+              <RegisterViews />
+            </PublicRoute>
+            <PublicRoute exact path="/login" restricted redirectTo="/contacts">
+              <LoginViews />
+            </PublicRoute>
+
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <ContactsViews />
+            </PrivateRoute>
+            <Route>
+              <NotFoundViews />
+            </Route>
+          </Switch>
+        </Suspense>
+      </Container>
+    )
   );
 }

@@ -6,7 +6,7 @@ const UserMenu = () => {
   const userName = useSelector(authSelectors.getUsername);
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className={s.userMenu}>
       <span>Hi, {userName}!</span>
       <button
         className={s.button}

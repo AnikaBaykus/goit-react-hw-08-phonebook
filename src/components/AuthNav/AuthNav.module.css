@@ -1,3 +1,7 @@
+.Navigation {
+  display: flex;
+  align-items: center;
+}
 .NavigationLink {
   padding: 10px 0;
 

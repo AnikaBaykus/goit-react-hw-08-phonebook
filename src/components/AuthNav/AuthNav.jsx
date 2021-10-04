@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const AuthNav = () => {
   return (
-    <div>
+    <div className={s.Navigation}>
       <NavLink
         className={s.NavigationLink}
         activeClassName={s.NavigationLinkActive}

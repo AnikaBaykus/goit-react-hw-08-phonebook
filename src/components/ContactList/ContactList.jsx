@@ -16,9 +16,11 @@ export default function ContactList() {
     <ul className={s.ul}>
       {contacts?.map(({ id, name, number }) => (
         <li className={s.li} key={id}>
-          <p className={s.p}>
-            {name}: {number}
-          </p>
+          <div className={s.contact}>
+            <p className={s.p}>{name}:</p>
+            <p className={s.p}>{number}</p>
+          </div>
+
           <button
             className={s.button}
             onClick={() => dispatch(contactsOperations.deleteContacts(id))}

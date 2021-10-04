@@ -55,7 +55,7 @@ export default function LoginForm() {
           required
           value={name}
           onChange={handleChange}
-          placeholder={'Add name...'}
+          placeholder={'Name...'}
         />
       </label>
 

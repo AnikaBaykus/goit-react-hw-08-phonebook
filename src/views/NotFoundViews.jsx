@@ -4,7 +4,7 @@ import Section from '../components/Section';
 export default function NotFoundViews() {
   return (
     <>
-      <Section title="NotFound">
+      <Section>
         <NotFound />
       </Section>
     </>
